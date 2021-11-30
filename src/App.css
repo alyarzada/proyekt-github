@@ -232,3 +232,7 @@ p {
   top: 38%;
   z-index: -100;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

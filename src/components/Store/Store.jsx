@@ -1,22 +1,23 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ProductContext } from '../contextAPI';
 import { HashLoader } from 'react-spinners';
-import 'aos/dist/aos.css';
-import { Link } from 'react-router-dom';
 import ReactNotification, { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import 'aos/dist/aos.css';
+
 
 function Store() {
   const { products, card, setCard, loading } = useContext(ProductContext);
   const [findProducts, setFindProducts] = useState([]);
 
+// addCardHandler
   const addCardHandler = (findItem) => {
     findItem['amount'] = 1;
 
-    let hasCard = card.filter((item) => item.id === findItem.id);
-    console.log(hasCard);
+    let hasCard = card.find((item) => item.id === findItem.id);
 
-    if (!hasCard.length) {
+    if (!hasCard) {
       card.unshift(findItem);
       store.addNotification({
         title: 'Shopping Card',
@@ -31,14 +32,30 @@ function Store() {
         },
       });
     }
-
+    else{
+      store.addNotification({
+        title: 'Shopping Card',
+        message: 'Mehsul sebetde var',
+        type: 'warning',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+          duration: 1000,
+        },
+      });
+    }
     setCard([...card]);
     localStorage.setItem('card', JSON.stringify(card));
   };
 
+// loading icon
   if (loading) {
     return <HashLoader />;
   }
+
+// searchHandler
   const searchHandler = (e) => {
     let text = e.target.value;
     let findProducts = products.filter((product) => {
@@ -46,6 +63,7 @@ function Store() {
     });
     setFindProducts(findProducts);
   };
+
   return (
     <>
       <ReactNotification />

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { ProductContext } from '../contextAPI';
 import ReactNotification, { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -6,6 +6,21 @@ import 'react-notifications-component/dist/theme.css';
 function Card() {
   const { card, setCard } = useContext(ProductContext);
 
+
+  const checkHandler = (e) => {
+    let allCheckBoxes = document.querySelectorAll('input[type=checkbox]')
+
+    if(e.target.checked){
+      allCheckBoxes.forEach(checkBoxes => {
+        checkBoxes.checked = true
+      })
+    }
+    else{
+      allCheckBoxes.forEach(checkBoxes => {
+        checkBoxes.checked = false
+      })
+    }
+  };
 
   const increaseHandler = (cardItem) => {
     let newCard = card.map((item) => {
@@ -66,7 +81,20 @@ function Card() {
         <table className="table bg-light rounded" data-aos="zoom-out">
           <thead>
             <tr>
-              <th scope="col">Product</th>
+              <th scope="col">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input checkallboxes"
+                    id="admin"
+                    onChange={checkHandler}
+                  />
+                  <label class="form-check-label cursor-pointer" for="admin">
+                    Select All
+                  </label>
+                  <span className="ms-5">Products</span>
+                </div>
+              </th>
               <th scope="col">Price</th>
               <th scope="col">Quantity</th>
               <th scope="col">Total</th>
@@ -79,6 +107,7 @@ function Card() {
               return (
                 <tr key={id}>
                   <td style={{ display: 'flex' }}>
+                    <input type="checkbox" className="form-check-input me-5" />
                     <img
                       style={{ width: '100px', height: '100px' }}
                       src={image}
