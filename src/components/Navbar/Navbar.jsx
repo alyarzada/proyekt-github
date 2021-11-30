@@ -61,11 +61,11 @@ function Navbar() {
 
   const { card } = useContext(ProductContext);
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent p-3">
-      <div class="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-transparent p-3">
+      <div className="container-fluid">
         {/* toggler */}
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo03"
@@ -73,7 +73,7 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         {/* button container */}
         <div className="button-container float-right d-lg-none">
@@ -88,7 +88,7 @@ function Navbar() {
           </div>
           <button
             type="button"
-            class="btn btn-outline-light"
+            className="btn btn-outline-light"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
@@ -96,7 +96,7 @@ function Navbar() {
           </button>
           <button
             type="button"
-            class="btn btn-light ml-2"
+            className="btn btn-light ml-2"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdropSignUp"
           >
@@ -104,7 +104,7 @@ function Navbar() {
           </button>
         </div>
         {/* collapse */}
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to="/" className="nav-link text-white">
@@ -148,7 +148,7 @@ function Navbar() {
             </div>
             <button
               type="button"
-              class="btn btn btn-outline-light px-4"
+              className="btn btn btn-outline-light px-4"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
@@ -157,7 +157,7 @@ function Navbar() {
 
             <button
               type="button"
-              class="btn btn-light px-4 ml-2"
+              className="btn btn-light px-4 ml-2"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdropSignUp"
             >
@@ -167,66 +167,66 @@ function Navbar() {
         </div>
         {/* Modals */}
         <div
-          class="modal fade"
+          className="modal fade"
           id="staticBackdrop"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="staticBackdropLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
               <div className="modal-header">
                 <h2>Log In</h2>
               </div>
               <div className="modal-body">
                 <form onSubmit={(e) => signInForm(e)} className="row g-3">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
                       type="email"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
                       name="email"
                       onChange={(e) => inputHandler(e)}
                     />
-                    <small id="emailHelp" class="form-text text-muted">
+                    <small id="emailHelp" className="form-text text-muted">
                       We'll never share your email with anyone else.
                     </small>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputPassword1">Password</label>
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputPassword1"
                       placeholder="Password"
                       name="password"
                       onChange={(e) => inputHandler(e)}
                     />
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
                       type="checkbox"
-                      class="form-check-input"
+                      className="form-check-input"
                       id="exampleCheck1"
                     />
-                    <label class="form-check-label" for="exampleCheck1">
+                    <label className="form-check-label" htmlFor="exampleCheck1">
                       I accept the Terms of Use & Privacy Policy
                     </label>
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-secondary"
+                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" className="btn btn-primary">
                       Submit
                     </button>
                   </div>
@@ -236,25 +236,25 @@ function Navbar() {
           </div>
         </div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="staticBackdropSignUp"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="staticBackdropLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
               <div className="modal-header">
                 <h2 className="mb-3">Create a new Account</h2>
               </div>
               <div className="modal-body">
                 <form onSubmit={(e) => signUpForm(e)} className="row g-3">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="First name"
                       aria-label="First name"
                       name="firstname"
@@ -262,10 +262,10 @@ function Navbar() {
                       onChange={(e) => inputHandler(e)}
                     />
                   </div>
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Last name"
                       aria-label="Last name"
                       name="lastname"
@@ -275,7 +275,7 @@ function Navbar() {
                   <div className="col-12">
                     <input
                       type="email"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
@@ -287,7 +287,7 @@ function Navbar() {
                   <div className="col-12">
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputPassword1"
                       placeholder="Password"
                       name="password"
@@ -298,32 +298,32 @@ function Navbar() {
                   <div className="col-12">
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputPassword1"
                       placeholder="Confirm Password"
                       name="confirmpassword"
                       onChange={(e) => inputHandler(e)}
                     />
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
                       type="checkbox"
-                      class="form-check-input"
+                      className="form-check-input"
                       id="exampleCheck1"
                     />
-                    <label class="form-check-label" for="exampleCheck1">
+                    <label className="form-check-label" htmlFor="exampleCheck1">
                       I accept the Terms of Use & Privacy Policy
                     </label>
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-secondary"
+                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" className="btn btn-primary">
                       Submit
                     </button>
                   </div>

@@ -15,10 +15,10 @@ function SpecificProduct() {
   return (
     <>
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb px-4">
-        <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-        <li class="breadcrumb-item"><Link to="/Store">Store</Link></li>
-        <li class="breadcrumb-item active" aria-current="page">{findItem.title}</li>
+      <ol className="breadcrumb px-4">
+        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+        <li className="breadcrumb-item"><Link to="/Store">Store</Link></li>
+        <li className="breadcrumb-item active" aria-current="page">{findItem.title}</li>
       </ol>
     </nav>
     <div className="container mt-5">

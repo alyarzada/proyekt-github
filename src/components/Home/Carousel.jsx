@@ -23,19 +23,19 @@ function Carousel() {
           '<i class="fas fa-chevron-right fa-2x text-light position-absolute top-40 end-5"></i>',
         ]}
       >
-        <div class="item">
+        <div className="item">
           <img src={img1} alt="" />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={img2} alt="" />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={img3} alt="" />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={img4} alt="" />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={img5} alt="" />
         </div>
       </OwlCarousel>

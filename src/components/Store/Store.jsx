@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { ProductContext } from '../contextAPI';
 import { HashLoader } from 'react-spinners';
 import 'aos/dist/aos.css';
-
 import { Link } from 'react-router-dom';
 import ReactNotification, { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -34,7 +33,6 @@ function Store() {
     }
 
     setCard([...card]);
-
     localStorage.setItem('card', JSON.stringify(card));
   };
 
@@ -53,11 +51,11 @@ function Store() {
       <ReactNotification />
       <div className="container-fluid">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb px-4">
-            <li class="breadcrumb-item">
+          <ol className="breadcrumb px-4">
+            <li className="breadcrumb-item">
               <Link to="/">Home</Link>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
+            <li className="breadcrumb-item active" aria-current="page">
             Store
             </li>
           </ol>
@@ -81,20 +79,20 @@ function Store() {
                   <div
                     data-aos="flip-left"
                     key={id}
-                    class="card card-own col-lg-2 col-md-3 col-sm-4 m-1"
+                    className="card card-own col-lg-2 col-md-3 col-sm-4 m-1"
                     style={{ width: '18rem' }}
                   >
-                    <img src={image} class="img-fluid" alt={title} />
-                    <div class="card-body">
+                    <img src={image} className="img-fluid" alt={title} />
+                    <div className="card-body">
                       <Link to={`/Store/${id}`}>
-                        <h5 class="card-title">{title}</h5>
+                        <h5 className="card-title">{title}</h5>
                       </Link>
                       <div className="d-flex gap-3">
                         <span className="card-price">${price}</span>
                         <del className="card-price">${price}</del>
                       </div>
                       <button
-                        class="btn btn-light btn-card"
+                        className="btn btn-light btn-card"
                         onClick={() => addCardHandler(mapItem)}
                       >
                         Add to card
@@ -109,20 +107,20 @@ function Store() {
                   <div
                     data-aos="flip-left"
                     key={id}
-                    class="card card-own col-lg-2 col-md-3 col-sm-4 m-1"
+                    className="card card-own col-lg-2 col-md-3 col-sm-4 m-1"
                     style={{ width: '18rem' }}
                   >
-                    <img src={image} class="img-fluid" alt={title} />
-                    <div class="card-body">
+                    <img src={image} className="img-fluid" alt={title} />
+                    <div className="card-body">
                       <Link to={`/Store/${id}`}>
-                        <h5 class="card-title">{title}</h5>
+                        <h5 className="card-title">{title}</h5>
                       </Link>
                       <div className="d-flex gap-3">
                         <span className="card-price">${price}</span>
                         <del className="card-price">${price}</del>
                       </div>
                       <button
-                        class="btn btn-light btn-card"
+                        className="btn btn-light btn-card"
                         onClick={() => addCardHandler(mapItem)}
                       >
                         Add to card
