@@ -23,7 +23,7 @@ function Content() {
         laudantium consequatur quasi esse aliquam praesentium facilis error
         nesciunt aut ullam quaerat?
       </p>
-      <button data-aos="slide-right" className="btn admin mt-2" type="button">
+      <button data-aos="slide-right" className="btn admin mt-2" id='download-cv-btn' type="button">
         <a href={cv} download className='text-decoration-none text-black'>Download CV</a>
       </button>
     </div>

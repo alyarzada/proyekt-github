@@ -6,12 +6,11 @@ import ReactNotification, { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'aos/dist/aos.css';
 
-
 function Store() {
   const { products, card, setCard, loading } = useContext(ProductContext);
   const [findProducts, setFindProducts] = useState([]);
 
-// addCardHandler
+  // addCardHandler
   const addCardHandler = (findItem) => {
     findItem['amount'] = 1;
 
@@ -31,8 +30,7 @@ function Store() {
           duration: 1000,
         },
       });
-    }
-    else{
+    } else {
       store.addNotification({
         title: 'Shopping Card',
         message: 'Mehsul sebetde var',
@@ -50,18 +48,20 @@ function Store() {
     localStorage.setItem('card', JSON.stringify(card));
   };
 
-// loading icon
+  // loading icon
   if (loading) {
     return <HashLoader />;
   }
 
-// searchHandler
+  // searchHandler
   const searchHandler = (e) => {
-    let text = e.target.value;
-    let findProducts = products.filter((product) => {
-      return product.title.toLowerCase().search(text) !== -1;
-    });
-    setFindProducts(findProducts);
+    let text = e.target.value.toLowerCase().trim();
+
+    setFindProducts(
+      products.filter((product) => {
+        return product.title.toLowerCase().search(text) !== -1;
+      })
+    );
   };
 
   return (
@@ -74,7 +74,7 @@ function Store() {
               <Link to="/">Home</Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-            Store
+              Store
             </li>
           </ol>
         </nav>
@@ -84,7 +84,7 @@ function Store() {
             <input
               type="search"
               className="form-control"
-              onChange={(e) => searchHandler(e)}
+              onChange={searchHandler}
               placeholder="Search"
             />
           </div>

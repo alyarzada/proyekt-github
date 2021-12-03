@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ProductContext } from '../contextAPI';
 import ReactNotification, { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -6,21 +6,59 @@ import 'react-notifications-component/dist/theme.css';
 function Card() {
   const { card, setCard } = useContext(ProductContext);
 
-
+  // for select all checkbox
   const checkHandler = (e) => {
-    let allCheckBoxes = document.querySelectorAll('input[type=checkbox]')
+    let allCheckBoxes = document.querySelectorAll('input[type=checkbox]');
 
-    if(e.target.checked){
-      allCheckBoxes.forEach(checkBoxes => {
-        checkBoxes.checked = true
-      })
-    }
-    else{
-      allCheckBoxes.forEach(checkBoxes => {
-        checkBoxes.checked = false
-      })
+    if (e.target.checked) {
+      allCheckBoxes.forEach((checkBoxes) => {
+        checkBoxes.checked = true;
+      });
+    } else {
+      allCheckBoxes.forEach((checkBoxes) => {
+        checkBoxes.checked = false;
+      });
     }
   };
+
+  // *for specific checkbox
+  // const checkSpecificBox = (x) => {
+  //       setCard(
+  //         card.map((item) => {
+  //           if (item.id === x.id) {
+  //             if(item.selected === true){
+  //             return {
+  //               ...item,
+  //               selected: true,
+  //             };
+  //           }
+  //           else if(item.selected === false){
+  //             return {
+  //               ...item,
+  //               selected: false,
+  //             };
+  //           }
+  //         } else {
+  //             return item;
+  //           }
+  //         })
+  //       );
+  // };
+
+  //* for removing selected items
+  // const removeSelectedItems = () => {
+  //   const selectAllBox = document.querySelector('.selectAllBox');
+
+  //   if (selectAllBox.checked) {
+  //     setCard([]);
+  //   } else {
+  //     setCard(
+  //       card.filter((item) => {
+  //         return item.selected === '' || item.selected === false;
+  //       })
+  //     );
+  //   }
+  // };
 
   const increaseHandler = (cardItem) => {
     let newCard = card.map((item) => {
@@ -85,7 +123,7 @@ function Card() {
                 <div class="form-check">
                   <input
                     type="checkbox"
-                    class="form-check-input checkallboxes"
+                    class="form-check-input selectAllBox"
                     id="admin"
                     onChange={checkHandler}
                   />
@@ -99,6 +137,11 @@ function Card() {
               <th scope="col">Quantity</th>
               <th scope="col">Total</th>
               <th scope="col">Remove</th>
+              <th scope="col">
+                <button className="btn btn-light" >
+                  remove selected items
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -107,7 +150,10 @@ function Card() {
               return (
                 <tr key={id}>
                   <td style={{ display: 'flex' }}>
-                    <input type="checkbox" className="form-check-input me-5" />
+                    <input
+                      type="checkbox"
+                      className="form-check-input me-5"
+                    />
                     <img
                       style={{ width: '100px', height: '100px' }}
                       src={image}

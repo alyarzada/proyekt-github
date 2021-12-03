@@ -16,6 +16,7 @@ export const ProductProvider = ({children}) => {
     setLoading(false)
   };
 
+ 
   useEffect(()=>{
     fetchProducts();
     setCard(
@@ -23,7 +24,7 @@ export const ProductProvider = ({children}) => {
     )
   },[]);
 
-  
+
   return (
     <ProductContext.Provider
       value={{ products, setProducts, card, setCard, loading, setLoading }}

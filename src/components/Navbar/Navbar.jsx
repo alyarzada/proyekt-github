@@ -1,15 +1,16 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ProductContext } from '../contextAPI';
-
+// material ui
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import img1 from '../Home/carousel-images/microsoft-edge-8tvoDBqOHZU-unsplash.jpg'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -21,10 +22,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Navbar() {
-  const [login, setLogin] = useState({
-    email: 'tunar@mail.ru',
-    password: '12345678',
-  });
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
+ 
+
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -32,34 +35,49 @@ function Navbar() {
     lastname: '',
     confirmpassword: '',
   });
-  useEffect(() => {
-    Aos.init({ duration: 1000 });
-  }, []);
 
-  const signUpForm = (e) => {
-    e.preventDefault();
-    console.log(data);
-  };
-  const signInForm = (e) => {
-    e.preventDefault();
-    console.log(data);
-    console.log(login);
-    if (login.email === data.email && login.password === data.password) {
-      alert('Giris ugurlu oldu');
-    } else {
-      alert('giris melumatlari sehvdir');
-    }
-  };
 
   const inputHandler = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    let newData = data;
-    newData[name] = value;
-    setData(newData);
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value 
+    })
+  };
+
+  const [errors, setErrors] = useState({});
+
+  const validation = () => {
+    const login = {
+      email: 'tunar@mail.ru',
+      password: '12345678',
+    };
+    let error = {};
+
+    if(!data.email){
+      error.email = 'Email is required'
+    } else if(!/\S+@\S+\.\S+/.test(data.email)) {
+      error.email = 'Email is invalid'
+    } else if(login.email !== data.email) {
+      error.email = 'Email is wrong'
+    }
+    if(!data.password){
+      error.password = 'Password is required'
+    } else if(data.password.length < 5){
+      error.password = 'Password must be more than 5 characters'
+    }  else if(login.password !== data.password){
+      error.password = 'Password is wrong'
+    }
+     return error
+  }
+
+  const validateHandler = (e) => {
+      e.preventDefault()
+      setErrors(validation)
   };
 
   const { card } = useContext(ProductContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-transparent p-3">
       <div className="container-fluid">
@@ -105,7 +123,7 @@ function Navbar() {
         </div>
         {/* collapse */}
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav text-center me-auto mb-2 mb-lg-0 bg-md-danger">
             <li className="nav-item">
               <Link to="/" className="nav-link text-white">
                 Home
@@ -123,17 +141,57 @@ function Navbar() {
                 Faq
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item about">
               <Link to="/About" className="nav-link text-white">
                 {' '}
                 About
               </Link>
+              <ul className='sub-menu'>
+                  <li><a href='/'>drop menu 1</a></li>
+                  <li><a href='/'>drop menu 2</a></li>
+                  <li><a href='/'>drop menu 3</a></li>
+                  <li><a href='/'>drop menu 4</a></li>
+              </ul>
             </li>
-            <li className="nav-item">
+            <li className="nav-item position-relative contact">
               <Link to="/Contact" className="nav-link text-white">
                 {' '}
                 Contact
               </Link>
+              <div className="bg-light rounded position-absolute mega-menu p-4">
+                <div className="row">
+                     <div className="col-md-3 col-6">
+                      <img className='img-fluid' src={img1} alt="image" />
+                    </div>
+                    <div className="col-md-3 col-6 ">
+                      <h5 className='mega-header'>Design Services</h5>
+                      <ul className="mega-links d-flex flex-column">
+                        <li><a href="/">Graphics</a></li>
+                        <li><a href="/">Vectors</a></li>
+                        <li><a href="/">Business cards</a></li>
+                        <li><a href="/">Custom logo</a></li>
+                      </ul>
+                    </div>
+                    <div className="col-md-3 col-6">
+                      <h5 className='mega-header'>Email Services</h5>
+                      <ul className="mega-links d-flex flex-column">
+                        <li><a href="/">Personal Email</a></li>
+                        <li><a href="/">Business Email</a></li>
+                        <li><a href="/">Mobile Email</a></li>
+                        <li><a href="/">Web Marketing</a></li>
+                      </ul>
+                    </div>
+                    <div className="col-md-3 col-6">
+                      <h5 className='mega-header'>Security Services</h5>
+                      <ul className="mega-links d-flex flex-column">
+                        <li><a href="/">Site seal</a></li>
+                        <li><a href="/">VPS Hosting</a></li>
+                        <li><a href="/">Privacy seal</a></li>
+                        <li><a href="/">Website design</a></li>
+                      </ul>
+                    </div>
+                </div>
+              </div>
             </li>
           </ul>
           <div className="button-container d-none d-lg-flex gap-2">
@@ -179,9 +237,10 @@ function Navbar() {
             <div className="modal-content">
               <div className="modal-header">
                 <h2>Log In</h2>
+                <p className="alert"></p>
               </div>
               <div className="modal-body">
-                <form onSubmit={(e) => signInForm(e)} className="row g-3">
+                <form onSubmit={validateHandler} className="row g-3">
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
@@ -191,11 +250,12 @@ function Navbar() {
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
                       name="email"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                     <small id="emailHelp" className="form-text text-muted">
                       We'll never share your email with anyone else.
                     </small>
+                  {errors.email && <p className='text-danger'>{errors.email}</p>}  
                   </div>
                   <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
@@ -205,14 +265,16 @@ function Navbar() {
                       id="exampleInputPassword1"
                       placeholder="Password"
                       name="password"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
+                  {errors.password && <p className='text-danger'>{errors.password}</p>}  
                   </div>
                   <div className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
                       id="exampleCheck1"
+                      onChange={inputHandler}
                     />
                     <label className="form-check-label" htmlFor="exampleCheck1">
                       I accept the Terms of Use & Privacy Policy
@@ -250,7 +312,7 @@ function Navbar() {
                 <h2 className="mb-3">Create a new Account</h2>
               </div>
               <div className="modal-body">
-                <form onSubmit={(e) => signUpForm(e)} className="row g-3">
+                <form className="row g-3">
                   <div className="col-md-6">
                     <input
                       type="text"
@@ -259,7 +321,7 @@ function Navbar() {
                       aria-label="First name"
                       name="firstname"
                       required
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                   </div>
                   <div className="col-md-6">
@@ -269,7 +331,7 @@ function Navbar() {
                       placeholder="Last name"
                       aria-label="Last name"
                       name="lastname"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                   </div>
                   <div className="col-12">
@@ -280,7 +342,7 @@ function Navbar() {
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
                       name="email"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                   </div>
 
@@ -291,7 +353,7 @@ function Navbar() {
                       id="exampleInputPassword1"
                       placeholder="Password"
                       name="password"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                   </div>
 
@@ -302,7 +364,7 @@ function Navbar() {
                       id="exampleInputPassword1"
                       placeholder="Confirm Password"
                       name="confirmpassword"
-                      onChange={(e) => inputHandler(e)}
+                      onChange={inputHandler}
                     />
                   </div>
                   <div className="form-check">
